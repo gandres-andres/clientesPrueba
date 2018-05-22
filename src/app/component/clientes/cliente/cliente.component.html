@@ -1,0 +1,60 @@
+<div class="container main-container">
+  <form [formGroup]="cliente" (ngSubmit)="guardarCliente()">
+    <div class="form-row">
+      <div class="form-group col-md-12" [ngClass]="{'has-danger': true }">
+        <label>Nombre*</label>
+        <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
+        <div *ngIf="cliente.controls['nombre'].errors?.required && !cliente.controls['nombre']._pristine" class="form-control-feedback">
+          El nombre es obligatorio
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label>Nit*</label>
+        <input type="text" class="form-control" placeholder="Nit" formControlName="nit">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label>Fecha Creación*</label>
+        <input type="text" class="form-control" placeholder="Fecha Creación" formControlName="fechaCreacion" disabled>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label>Representante Legal*</label>
+        <input type="text" class="form-control" placeholder="Representante Legal" formControlName="representanteLegal">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label>Dirección</label>
+        <input type="text" class="form-control" placeholder="Dirección" formControlName="direccion">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label>Teléfono</label>
+        <input type="tel" class="form-control" placeholder="Teléfono" formControlName="telefono">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label>Email</label>
+        <input type="email" class="form-control" placeholder="Email" formControlName="email">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label>Gran Contribuyente</label>
+        <select class="form-control" formControlName="granContribuyente">
+          <option value="si">SI</option>
+          <option value="no">NO</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success">Guardar cliente</button>
+    {{cliente.valid}}
+  </form>
+</div>
