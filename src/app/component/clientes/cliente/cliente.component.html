@@ -1,5 +1,11 @@
 <div class="container main-container">
   <form [formGroup]="cliente" (ngSubmit)="guardarCliente()">
+      <div class="row">
+          <div class="col-md-12">
+              <button type="button" class="btn btn-outline-danger" [routerLink]="[ '/clientes' ]">Regresar</button>
+              <button type="button" class="btn btn-outline-success" (click)="nuevoCliente()">Nuevo cliente</button>
+            </div>
+        </div>
     <div class="form-row">
       <div class="form-group col-md-12" [ngClass]="{'has-danger': true }">
         <label>Nombre*</label>
@@ -13,6 +19,9 @@
       <div class="form-group col-md-12">
         <label>Nit*</label>
         <input type="text" class="form-control" placeholder="Nit" formControlName="nit">
+        <div *ngIf="cliente.controls['nit'].errors?.required && !cliente.controls['nit']._pristine" class="form-control-feedback">
+          El Nit es obligatorio
+        </div>
       </div>
     </div>
     <div class="form-row">
@@ -25,6 +34,10 @@
       <div class="form-group col-md-12">
         <label>Representante Legal*</label>
         <input type="text" class="form-control" placeholder="Representante Legal" formControlName="representanteLegal">
+        <div *ngIf="cliente.controls['representanteLegal'].errors?.required && !cliente.controls['representanteLegal']._pristine"
+          class="form-control-feedback">
+          El Representante Legal es obligatorio
+        </div>
       </div>
     </div>
     <div class="form-row">
@@ -54,7 +67,7 @@
         </select>
       </div>
     </div>
-    <button type="submit" class="btn btn-success">Guardar cliente</button>
+    <button type="submit" [disabled]="!cliente.valid" class="btn btn-success">Guardar cliente</button>
     {{cliente.valid}}
   </form>
 </div>

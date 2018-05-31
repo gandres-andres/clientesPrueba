@@ -2,20 +2,25 @@
   <h1>Clientes</h1>
   <hr>
   <div class="row">
-      <div class="col-md-12">
-          <button type="button" class="btn btn-outline-primary right" [routerLink]="[ '/cliente', 'nuevo' ]" >Nuevo cliente</button>
-        </div>
+    <div class="col-md-12">
+      <button type="button" class="btn btn-outline-primary right" [routerLink]="[ '/cliente', 'nuevo' ]">Nuevo cliente</button>
+    </div>
   </div>
   <br>
   <div class="row">
     <div class="col-md-12" *ngIf="listaClientes">
       <input class="form-control mr-sm-2" type="search" placeholder="Filtrar por nombre" aria-label="Search">
     </div>
-    <div class="col-md-12" *ngIf="!listaClientes">
-      <div class="alert alert-warning" role="alert">
-          Actualmente no existe ningún cliente!
+    <div class="col-md-12" *ngIf="!listaClientes && !loading">
+      <div class="alert alert-info" role="alert">
+        Actualmente no existe ningún cliente!
       </div>
     </div>
+    <div class="col-md-12" *ngIf="loading">
+        <div class="alert alert-warning" role="alert">
+          Cargando...
+        </div>
+      </div>
   </div>
   <br>
   <div class="row" *ngIf="listaClientes">
@@ -30,23 +35,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
+          <tr *ngFor="let k of listaClientes | keys">
+            <td>{{listaClientes[k].nombre}}</td>
+            <th>{{listaClientes[k].nit}}</th>
+            <td>{{listaClientes[k].fechaCreacion}}</td>
+            <td>
+              <button type="button" class="btn btn-outline-success" [routerLink]="[ '/cliente', k ]">Editar</button>
+              <button type="button" class="btn btn-outline-danger" (click)="eliminarCliente(k)">Eliminar</button>
+            </td>
           </tr>
         </tbody>
       </table>
